@@ -1,0 +1,570 @@
+
+/* ==========================================
+   SECTION 1: GLOBAL CORE THEME
+   ========================================== */
+:root {
+    --primary: #1a1a1a;
+    --accent: #2c7a7b;
+    --bg-light: #f8f9fa;
+    --bg-visual: #fcfcfc;
+    --border-color: #e0e0e0;
+    --border-soft: #eee;
+}
+
+body { 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+    background-color: var(--bg-light); 
+    color: #333;
+}
+
+.container { 
+    display: flex; 
+    max-width: 1400px; 
+    margin: auto; 
+    background: #fff; 
+    border: 1px solid var(--border-color);
+    border-radius: 4px; /* Professional sharp-rounded corners */
+    align-items: flex-start;
+}
+
+/* ==========================================
+   SECTION 2: COLUMNS DASHBOARD LAYOUT
+   ========================================== */
+.column { padding: 30px; }
+
+/* Left Column Selection TAB*/
+.selection-panel { 
+    flex: 2; 
+    border-right: 1px solid var(--border-soft); 
+}
+/* Center Column - STEADY PROFESSIONAL VISUALIZATION PANEL */
+.visualization-panel { 
+    flex: 3; 
+    background-color: var(--bg-visual);
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+      
+    position: sticky;
+    top: 20px; 
+    height: calc(100vh - 40px); 
+    margin: 0; /* Flush with container */
+    overflow: hidden;
+}
+/* Right Column - Summary TAB */
+.summary-panel { 
+    flex: 1.2; 
+    background-color: #ffffff; 
+    border-left: 1px solid var(--border-soft); 
+}
+
+
+/* ==========================================
+   SECTION 3: ELEMENTS (Cards, Lists, CHeckboxes, etc.)
+   ========================================== */
+.section-group {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.section-group:last-child { border-bottom: none; }
+
+.section-group h2 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 15px;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* --- THE VERSION GRID (For V4/V5 Cards) --- */
+.version-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.version-option {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+/* Completely hide radio circles */
+.version-option input[type="radio"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* The Professional Card */
+.version-card {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 15px;
+    background: #ffffff;
+    transition: 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Active State */
+input[type="radio"]:checked + .version-card {
+    border: 2px solid var(--primary);
+    background-color: #f9f9f9;
+}
+/* Sleek Pill Tags */
+.tag { 
+    font-size: 0.65rem; 
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px; 
+    border: 1px solid #dcdcdc; 
+    border-radius: 20px; 
+    color: #888;
+}
+
+/* Premium Tag specific color */
+.tag.premium { 
+    border-color: var(--accent); 
+    color: var(--accent);
+}
+
+/* Tag colors when card is selected */
+input[type="radio"]:checked + .version-card .tag {
+    background: #555;
+    color: #fff;
+    border-color: #555;
+}
+
+input[type="radio"]:checked + .version-card .tag.premium {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+/* Price under the card */
+.version-option .price-val {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    text-align: right;
+    padding-right: 5px;
+}
+
+input[type="radio"]:checked ~ .price-val {
+    color: var(--accent);
+}
+
+.model-code { font-weight: bold; font-size: 1.1rem; }
+
+/* --- THE OPTION ITEMS (For Checkboxes/Lists) --- */
+.option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 0.95rem;
+}
+
+.option-item label {
+    flex-grow: 1;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+/*  Cards Layout */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.hidden-check {
+    display: none;
+}
+
+/* Card Styling */
+.options-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+/* Highlight the entire card border when selected */
+.options-card:has(.hidden-check:checked) {
+    border-color: #3b82f6;
+    background: #f0f7ff;
+}
+
+/* The Main Selectable Area */
+.main-selection {
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.card-trigger {
+    cursor: pointer;
+    width: 100%;
+}
+
+.card-name {
+    display: block;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+/* Card Optional Row (Indented Look) */
+.card-optional {
+    background: #f8fafc;
+    border-top: 1px solid #edf2f7;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+}
+
+.card-optional-label {
+    cursor: pointer;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Common Button Styling */
+.common-btn-card {
+    margin-top: 15px;
+    padding: 12px 15px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.common-trigger {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.text-group strong {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.text-group small {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* Common Button Highlight */
+.common-btn-card:has(.hidden-check:checked) {
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+}
+
+.common-btn-card:has(.hidden-check:checked) .price-val {
+    background: #10b981;
+    color: #fff;
+}
+
+/* Options area Setup */
+#medical-options {
+    margin-top: 20px;
+}
+
+/* Ensure the CCTV group has the same spacing as Medical */
+#cctv-options {
+    margin-top: 25px;
+}
+
+/* Specific styling for the small text in CCTV cards */
+.main-selection small {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+/* Ensure the PTZ wrapper still respects your version logic if needed */
+#ptz-option-wrapper {
+    display: flex; /* Changed from your inline 'none' to flex to match layout */
+    margin-top: 15px;
+}
+
+
+/* Professional Action Button */
+button { 
+    width: 100%; 
+    padding: 14px; 
+    background-color: #1a1a1a; /* Modern black professional theme */
+    color: white; 
+    border: none; 
+    border-radius: 2px; 
+    cursor: pointer; 
+    font-weight: 600;
+    font-size: 1em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+}
+button:hover { background-color: #333; }
+
+
+/* ==========================================
+   SECTION 4: VISUAL LAYERING (Image Stacking)
+   ========================================== */
+
+   /* PROPERLY SCALED VISUAL CONTAINER */
+#kiosk-layers {
+    position: relative;
+    width: 90%; 
+    max-width: 500px; 
+    aspect-ratio: 1 / 1.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#kiosk-layers img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none; 
+    display: none; 
+    /* Clean image rendering */
+    image-rendering: -webkit-optimize-contrast; 
+}
+
+#visual-placeholder { 
+    color: #999; 
+    font-size: 0.9em; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* ==========================================
+   SECTION 5: MOBILE RESOLUTION
+   ========================================== */
+    /* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stacks panels vertically */
+        padding: 10px;
+    }
+
+    .column {
+        width: 100%;
+        padding: 15px;
+        border-right: none;
+        border-left: none;
+        border-bottom: 1px solid #eee;
+        min-height: auto;
+    }
+
+    /* Keep the visual at the top and steady */
+    .visualization-panel {
+        order: -1; /* Moves this to the very top */
+        position: sticky;
+        top: 0;
+        height: 350px; /* Reduced height for mobile screens */
+        z-index: 100;
+        background-color: #ffffff;
+        margin: 0 0 20px 0;
+        border-bottom: 2px solid #eee;
+    }
+
+    #kiosk-layers {
+        max-width: 250px; /* Smaller kiosk for mobile */
+    }
+
+    .selection-panel {
+        flex: none;
+    }
+
+    .summary-panel {
+        flex: none;
+        background-color: #fff;
+    }
+
+    #total-price {
+        font-size: 1.6em;
+    }
+
+    /* Make buttons and inputs easier to touch */
+    .option-item {
+        padding: 12px 0;
+    }
+}
+
+
+/* ==========================================
+   SECTION 6: VISIBILITY & STATE MANAGEMENT
+   ========================================== */
+/* The Master Toggle Switch for Pricing */
+.hide-prices .price-val,
+.hide-prices .price-display,
+.hide-prices #base-price,
+.hide-prices #options-total,
+.hide-prices #total-price {
+    display: none !important;
+}
+ 
+/* 1. Hide all dependent groups by default */
+.version-dependent {
+    display: none !important;
+}
+
+/* 2. Show them ONLY if a version is selected (V4 or V5) */
+.state-v4 .version-dependent,
+.state-v5 .version-dependent {
+    display: block !important;
+}
+
+/* 3. Specific Version Logic (The Exceptions) */
+/* Hide Advertising for V4 */
+.state-v4 #advertising-options {
+    display: none !important;
+}
+
+/* Hide PTZ for V5 */
+.state-v5 #ptz-option-wrapper {
+    display: none !important;
+}
+
+/* Ensure PTZ is Flex for V4 if needed */
+.state-v4 #ptz-option-wrapper {
+    display: flex !important;
+}
+
+        /* model-viewer {
+            width: 100%;
+            height: 500px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        } */
+
+/* Full Screen Overlay - No Cropping */
+/* Full Screen Overlay - Corrected */
+.overlay-3d {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,245,255,0.95) 100%);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100000;
+    overflow: hidden; 
+    
+    /* Layout rules */
+    display: none; /* <--- Move this to the bottom of the layout section */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}    
+
+/* Ensure model viewer fills the screen without being clipped */
+#kiosk-3d {
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+/* Enhanced Close Button - High Z-Index to prevent being hidden */
+.close-hitbox {
+    position: absolute;
+    top: 30px; /* Adjusted slightly */
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 200000; /* Increased to stay above the 3D model */
+    pointer-events: auto; /* Makes sure the click registers */
+}
+
+.close-3d {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    font-size: 32px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.close-hitbox:hover .close-3d {
+    transform: scale(1.1) rotate(90deg);
+    background: #ff1a1a;
+}
+
+.close-label {
+    font-size: 10px;
+    font-weight: bold;
+    color: #333; /* Darker for better visibility */
+    margin-top: 8px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px white; /* Adds glow so it's visible over the model */
+}
+
+/* Text Overlay Styling */
+.modal-info-area {
+    position: absolute;
+    bottom: 30px;
+    text-align: center;
+    pointer-events: none; /* Allows user to click "through" text to rotate model */
+    z-index: 200000;
+}
+
+#modal-title {
+    color: #1a1a1a;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-size: 26px;
+    margin: 0;
+}
+
+.modal-subtitle {
+    color: #007bff;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
