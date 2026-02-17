@@ -29,8 +29,8 @@
     const SHOW_PRICES = false; // Master Switch
 
     const VERSION_DATA = {
-        'V4': { basePrice: 250000, imageFolder: 'v4/img/', baseImage: 'kiosk_base_v4.png' },
-        'V5': { basePrice: 450000, imageFolder: 'v5/img/', baseImage: 'kiosk_base_v5.png' }
+        'v4': { basePrice: 250000, imageFolder: 'v4/img/', baseImage: 'kiosk_base_v4.png' },
+        'v5': { basePrice: 450000, imageFolder: 'v5/img/', baseImage: 'kiosk_base_v5.png' }
     };
 
     let currentBasePrice = 0;
@@ -72,7 +72,7 @@ function handleVersionChange(version) {
         updateLayerSources(VERSION_DATA[version].imageFolder, version);
         
         // Reset PTZ if switching to V5
-        if (version === 'V5') {
+        if (version === 'v5') {
             const ptzCheck = document.getElementById('ptz_camera');
             if (ptzCheck) ptzCheck.checked = false;
         }
@@ -289,3 +289,4 @@ function close3D() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
+
