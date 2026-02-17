@@ -225,33 +225,55 @@ document.addEventListener('DOMContentLoaded', () => handleVersionChange(null));
 
 
 function downloadPDF() {
-    // 1. Target the content DIV (this avoids printing the 'Summary' title if you want, 
-    // or change to '.summary-panel' to include the title)
-    const element = document.getElementById('summary-content'); 
-    const btn = element.querySelector('.btn-primary');
+    const selectionPanel = document.querySelector('.selection-panel');
+    const visualPanel = document.querySelector('.visualization-panel');
+    const summaryPanel = document.querySelector('.summary-panel');
+    const downloadBtn = document.querySelector('.btn-primary');
+    const container = document.querySelector('.container');
 
-    if (!element) {
-        alert("Summary content not found!");
-        return;
-    }
+    if (!selectionPanel || !visualPanel || !summaryPanel) return;
 
-    // 2. Hide the button so it doesn't show up in the PDF
-    btn.style.display = 'none';
+    // 1. Prepare for "Clean" look
+    selectionPanel.style.display = 'none';
+    downloadBtn.style.display = 'none';
+    
+    // Remove background colors and borders temporarily
+    const originalBg = container.style.background;
+    const originalShadow = container.style.boxShadow;
+    container.style.background = 'white';
+    container.style.boxShadow = 'none';
+    container.style.color = 'black'; // Ensure text is black for printing
+
+    // Force panels to stay at a natural size (prevents stretching)
+    visualPanel.style.flex = '0 0 auto';
+    visualPanel.style.width = '450px'; // Set a fixed width for the image area
+    summaryPanel.style.flex = '1';
 
     const opt = {
-        margin:       [10, 10],
-        filename:     'Kiosk_Quote.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, letterRendering: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        margin:       [15, 15],
+        filename:     'Janrakshak_Quote.pdf',
+        image:        { type: 'jpeg', quality: 1 }, // High quality
+        html2canvas:  { 
+            scale: 3,             // Higher scale for crisp text
+            useCORS: true, 
+            backgroundColor: null, // Removes the black background
+            removeContainer: true
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
     };
 
-    // 3. Generate PDF then show the button again
-    html2pdf().set(opt).from(element).save().then(() => {
-        btn.style.display = 'block';
+    // 2. Capture
+    html2pdf().set(opt).from(container).save().then(() => {
+        // 3. Restore everything to original state
+        selectionPanel.style.display = 'block';
+        downloadBtn.style.display = 'block';
+        container.style.background = originalBg;
+        container.style.boxShadow = originalShadow;
+        container.style.color = ''; 
+        visualPanel.style.width = '';
+        visualPanel.style.flex = '';
     });
 }
-
 console.log("Groups found:", versionDependentGroups.length);
 
 
@@ -289,4 +311,5 @@ function close3D() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
+
 
