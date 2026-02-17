@@ -21,7 +21,7 @@
     <span class="icon">⟲</span> View 3D Lookup
 </button>
 
-<div id="modal-3d" class="overlay-3d">
+<!-- <div id="modal-3d" class="overlay-3d">
     <div class="close-hitbox" onclick="close3D()">
         <button class="close-3d">&times;</button>
         <span class="close-label">CLOSE</span>
@@ -43,8 +43,30 @@
         <h3 id="modal-title">Janrakshak V4</h3>
         <p class="modal-subtitle">Interactive 3D Configuration</p>
     </div>
-</div>
+</div> -->
+<div id="modal-3d" class="overlay-3d">
+    <div class="close-hitbox" onclick="close3D()">
+        <button class="close-3d">&times;</button>
+        <span class="close-label">CLOSE</span>
+    </div>
+    
+    <model-viewer 
+        id="kiosk-3d"
+        src="v4/model.glb" 
+        alt="3D model"
+        auto-rotate
+        camera-controls
+        touch-action="none"
+        bounds="tight"
+        shadow-intensity="1"
+        ar>
+    </model-viewer>
 
+    <div class="modal-info-area">
+        <h3 id="modal-title">Janrakshak V4</h3>
+        <p class="modal-subtitle">Interactive 3D Configuration</p>
+    </div>
+</div>
             <div class="section-group">
                 <h2>⚙️ Select Version</h2>
                 <div class="version-grid">
@@ -256,7 +278,7 @@
              
 </div>
  
-<script src="script2.js"></script>
+<script src="script.js"></script>
 
 
 </body>
